@@ -21,9 +21,13 @@
 <p>1.下載shareX</p>
 <h3>1031</h3>
 <p>1.學習使用wink</p>
+<h3>1104</h3>
+<p>1.貪食蛇程式<br/>&lt;!-- 導入 brython 程式庫 --&gt;<br/>&lt;script src="/static/brython.js"&gt;&lt;/script&gt;<br/>&lt;script src="/static/brython_stdlib.js"&gt;&lt;/script&gt;<br/>&lt;!-- 啟動 Brython --&gt;<br/>&lt;script&gt;// &lt;![CDATA[<br/>window.onload=function(){<br/>brython({debug:1, pythonpath:['/static/','./../downloads/py/']});<br/>}<br/>// ]]&gt;&lt;/script&gt;<br/>&lt;p&gt;&lt;!-- 導入 FileSaver 與 filereader --&gt;&lt;/p&gt;<br/>&lt;p&gt;<br/>&lt;script type="text/javascript" src="/static/ace/FileSaver.min.js"&gt;&lt;/script&gt;<br/>&lt;script type="text/javascript" src="/static/ace/filereader.js"&gt;&lt;/script&gt;<br/>&lt;/p&gt;<br/>&lt;p&gt;&lt;!-- 導入 ace --&gt;&lt;/p&gt;<br/>&lt;p&gt;<br/>&lt;script type="text/javascript" src="/static/ace/ace.js"&gt;&lt;/script&gt;<br/>&lt;script type="text/javascript" src="/static/ace/ext-language_tools.js"&gt;&lt;/script&gt;<br/>&lt;script type="text/javascript" src="/static/ace/mode-python3.js"&gt;&lt;/script&gt;<br/>&lt;script type="text/javascript" src="/static/ace/snippets/python.js"&gt;&lt;/script&gt;<br/>&lt;/p&gt;<br/>&lt;p&gt;&lt;!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--&gt;&lt;/p&gt;<br/>&lt;p&gt;<br/>&lt;script type="text/javascript"&gt;// &lt;![CDATA[<br/>function doSave(storage_id, filename){<br/> var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});<br/> filename = document.getElementById(filename).value<br/> saveAs(blob, filename+".py");<br/>}<br/>// ]]&gt;&lt;/script&gt;<br/>&lt;/p&gt;<br/>&lt;p&gt;&lt;!-- 印出版次與關鍵字程式 --&gt;&lt;/p&gt;<br/>&lt;p&gt;<br/>&lt;script type="text/python3"&gt;// &lt;![CDATA[<br/>from browser import document as doc<br/>import ace<br/># 清除畫布<br/>def clear_bd(ev):<br/> bd = doc["brython_div"]<br/> bd.clear()<br/># Brython 3.3.4 內建的 container 名稱為 'container' 且 turtle 輸出為 svg 必須使用 div 訂定 id<br/>Ace = ace.Editor(editor_id="kw_editor", console_id="kw_console", container_id="kw__container", storage_id="kw_py_src" )<br/># 從 gist 取出程式碼後, 放入 editor 作為 default 程式<br/>def run():<br/> # 利用 get 取下 src 變數值<br/> try:<br/> url = doc.query["src"]<br/> except:<br/> url = "https://gist.githubusercontent.com/40923129/c7c875305c67bde7d23c33c7284a0b23/raw/a3c01ebab29c6a75d2170717cdba954355b963de/snake"<br/> prog = open(url).read()</p>
+<p># 將程式載入編輯區<br/> Ace.editor.setValue(prog)<br/> Ace.editor.scrollToRow(0)<br/> Ace.editor.gotoLine(0)<br/> # 直接執行程式<br/> #ns = {'_name_':'_main_'}<br/> #exec(prog, ns)<br/> # 按下 run 按鈕<br/> Ace.run()</p>
+<p># 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定<br/>doc['kw_run'].bind('click', Ace.run)<br/>doc['kw_show_console'].bind('click', Ace.show_console)<br/>doc['kw_clear_console'].bind('click', Ace.clear_console)<br/>doc['clear_bd'].bind('click', clear_bd)<br/># 呼叫函式執行<br/>run()<br/>// ]]&gt;&lt;/script&gt;<br/>&lt;/p&gt;<br/>&lt;div id="brython_div"&gt;&lt;/div&gt;<br/>&lt;p&gt;&lt;!-- 用來顯示程式碼的 editor 區域 --&gt;&lt;/p&gt;<br/>&lt;div id="kw_editor" style="width: 600px; height: 300px;"&gt;&lt;/div&gt;<br/>&lt;p&gt;&lt;!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --&gt;&lt;/p&gt;<br/>&lt;p&gt;!-- 存擋表單開始 --&amp;gt;&lt;/p&gt;<br/>&lt;form&gt;&lt;label&gt;Filename: &lt;input id="kw_filename" placeholder="input file name" type="text"&gt;.py&lt;/label&gt; &lt;input onclick="doSave('kw_py_src', 'kw_filename');" type="submit" value="Save"&gt;&lt;/form&gt;&lt;!-- 存擋表單結束 --&gt;<br/>&lt;p&gt;&lt;/p&gt;<br/>&lt;!-- 執行與清除按鈕開始 --&gt;<br/>&lt;p&gt;&lt;button id="kw_run"&gt;Run&lt;/button&gt; &lt;button id="kw_show_console"&gt;Output&lt;/button&gt; &lt;button id="kw_clear_console"&gt;清除輸出區&lt;/button&gt;&lt;button id="clear_bd"&gt;清除繪圖區&lt;/button&gt;&lt;button onclick="window.location.reload()"&gt;Reload&lt;/button&gt;&lt;/p&gt;<br/>&lt;!-- 執行與清除按鈕結束 --&gt;<br/>&lt;p&gt;&lt;/p&gt;<br/>&lt;!-- 程式執行 ouput 區 --&gt;<br/>&lt;div style="width: 100%; height: 100%;"&gt;&lt;textarea autocomplete="off" id="kw_console" style="margin: 0px; width: 485px; height: 195px;"&gt;&lt;/textarea&gt;&lt;/div&gt;</p>
 <p></p>
 <p></p>
-<p style="text-align: right;">更新日期:2021/10/31</p>
+<p style="text-align: right;">更新日期:2021/11/04</p>
 <p style="padding-left: 60px;"></p>
 <h1>HW1</h1>
 <p>HW1 - 網際動畫與 touch typing 佔學期成績 20%.</p>
@@ -121,7 +125,8 @@ run()
 <!-- 執行與清除按鈕結束 -->
 <p></p>
 <!-- 程式執行 ouput 區 -->
-<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console" style="margin: 0px; width: 485px; height: 195px;"></textarea></div><h1>HW3</h1>
+<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console" style="margin: 0px; width: 485px; height: 195px;"></textarea></div>
+<h1>HW3</h1>
 <p></p>
 <p>HW3 - AI 貪食蛇佔學期成績 30%.</p>
 <p><span style="background-color: #ffff99;">HW3 必須在 2021.12.22 22:00 之前完成.</span></p>
