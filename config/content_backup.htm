@@ -5,7 +5,8 @@
 <p>網站倉儲: <a href="https://github.com/jason60714/cp2021_hw">https://github.com/jason60714/cp2021_hw</a></p>
 <p>網站連結: <a href="https://jason60714.github.io/cp2021_hw/">https://jason60714.github.io/cp2021_hw/</a></p>
 <p>其他與個人或作業相關資料說明或介紹</p>
-<h1>final</h1>
+<h1>Final2</h1>
+<h1>功課</h1>
 <!-- 導入 brython 程式庫 -->
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
@@ -97,6 +98,22 @@ def chec_inp(ev):
     #Ace.run()
 
 
+# id 為 "final2" 的按鈕點按時, 執行 check_input 方法
+doc["final2"].bind('click', checkq_input)
+
+
+final2url = " https://gist.githubusercontent.com/jason60714/cbe9220a02b265113a6b75cd60310246/raw/18413b6a430c85ecc67ee8999669c2ccc223d7d7/final2"
+# 從 gist 取得程式碼
+check_final2 = open(final2url).read()
+
+
+def chec_inp(ev):
+    Ace.editor.setValue(chec_wq)
+    Ace.editor.scrollToRow(0)
+    Ace.editor.gotoLine(0)
+    #Ace.run()
+
+
 # id 為 "asd" 的按鈕點按時, 執行 chec_inp 方法
 doc["asd"].bind('click', chec_inp)
 
@@ -136,26 +153,6 @@ w13 = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src
 document["w13"].bind("click", w13.prog)
 </script>
 </p>
-<p>
-<script type="text/python3">
-import beditor
-from browser import document
-url = "https://gist.githubusercontent.com/41023125/0ea70a5f5ba83f806e102d91f4e14a7c/raw/3ecf01d5caba40b7e52094a5663a263110d8f3ba/final1"
-src = open(url).read()
-final1 = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src")
-document["final1"].bind("click",final1.prog)
-</script>
-</p>
-<p>
-<script type="text/python3">
-import beditor
-from browser import document
-url = "https://gist.githubusercontent.com/41023125/0495389a86d42dc904bcbf671f757549/raw/3b17dfc86718c79fc503275df00178e3f92e31fe/final2"
-src = open(url).read()
-final2 = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src")
-document["final2"].bind("click",final2.prog)
-</script>
-</p>
 <p><!-- 用來顯示程式碼的 editor 區域 --></p>
 <div id="kw_editor" style="width: 600px; height: 300px;"></div>
 <p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
@@ -169,7 +166,7 @@ document["final2"].bind("click",final2.prog)
 <p><button><!-- 程式執行 ouput 區 --></button></p>
 <div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console"></textarea></div>
 <p><button><!-- Brython 程式執行的結果, 都以 brython_div 作為切入位置 --></button></p>
-<div id="brython_div"></div><h1>Exam</h1>
+<h1>Exam</h1>
 <h2>W13</h2>
 <h3>列出 10 個座標</h3>
 <!-- 導入 brython 程式庫 -->
