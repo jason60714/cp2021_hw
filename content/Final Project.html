@@ -2,7 +2,7 @@
         <head>
         <title>cp2021 homework site</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -139,103 +139,28 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">手動貪食蛇 << <a href='手動貪食蛇.html'>Previous</a> <a href='Final Project.html'>Next</a> >> Final Project<br /><h1>自動貪食蛇</h1>
-<p>gist: <a href="https://gist.githubusercontent.com/jason60714/5172a8745763adbb88af94c635fa956b/raw/c9e8a6b08f2fc80f0bba8e0939c582705fc8cc8a/snake%2520abc">https://gist.githubusercontent.com/jason60714/5172a8745763adbb88af94c635fa956b/raw/c9e8a6b08f2fc80f0bba8e0939c582705fc8cc8a/snake%2520abc</a></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<div id="brython_div"></div>
-<!-- 導入 brython 程式庫 -->
-<script src="./../cmsimde/static/brython.js"></script>
-<script src="./../cmsimde/static/brython_stdlib.js"></script>
-<!-- 啟動 Brython -->
-<script>
-window.onload=function(){
-brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
-}
-</script>
-<p><!-- 導入 FileSaver 與 filereader --></p>
-<p>
-<script src="./../cmsimde/static/ace/FileSaver.min.js" type="text/javascript"></script>
-<script src="./../cmsimde/static/ace/filereader.js" type="text/javascript"></script>
-</p>
-<p><!-- 導入 ace --></p>
-<p>
-<script src="./../cmsimde/static/ace/ace.js" type="text/javascript"></script>
-<script src="./../cmsimde/static/ace/ext-language_tools.js" type="text/javascript"></script>
-<script src="./../cmsimde/static/ace/mode-python3.js" type="text/javascript"></script>
-<script src="./../cmsimde/static/ace/snippets/python.js" type="text/javascript"></script>
-</p>
-<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
-<p>
-<script type="text/javascript">
-function doSave(storage_id, filename){
-    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
-    filename = document.getElementById(filename).value
-    saveAs(blob, filename+".py");
-}
-</script>
-</p>
-<p><!-- 印出版次與關鍵字程式 --></p>
-<p>
-<script type="text/python3">
-from browser import document as doc
-import ace
-# 清除畫布
-def clear_bd(ev):
-    bd = doc["brython_div"]
-    bd.clear()
-# Brython 3.3.4 內建的 container 名稱為  'container' 且 turtle 輸出為 svg 必須使用 div 訂定 id
-Ace = ace.Editor(editor_id="kw_editor", console_id="kw_console", container_id="kw__container", storage_id="kw_py_src" )
-# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
-def run():
-    # 利用 get 取下 src 變數值
-    try:
-        url = doc.query["src"]
-    except:
-        url = "https://gist.githubusercontent.com/jason60714/5172a8745763adbb88af94c635fa956b/raw/c9e8a6b08f2fc80f0bba8e0939c582705fc8cc8a/snake%2520abc"
-    prog = open(url).read()
-
-    # 將程式載入編輯區
-    Ace.editor.setValue(prog)
-    Ace.editor.scrollToRow(0)
-    Ace.editor.gotoLine(0)
-    # 直接執行程式
-    #ns = {'_name_':'_main_'}
-    #exec(prog, ns)
-    # 按下 run 按鈕
-    Ace.run()
-
-# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
-doc['kw_run'].bind('click', Ace.run)
-doc['kw_show_console'].bind('click', Ace.show_console)
-doc['kw_clear_console'].bind('click', Ace.clear_console)
-doc['clear_bd'].bind('click', clear_bd)
-# 呼叫函式執行
-run()
-</script>
-</p>
-<div id="brython_div"></div>
-<p><!-- 用來顯示程式碼的 editor 區域 --></p>
-<div id="kw_editor" style="width: 600px; height: 300px;"></div>
-<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
-<p>!-- 存擋表單開始 --&gt;</p>
-<form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src', 'kw_filename');" type="submit" value="Save"/></form><!-- 存擋表單結束 -->
-<p></p>
-<!-- 執行與清除按鈕開始 -->
-<p><button id="kw_run">Run</button> <button id="kw_show_console">Output</button> <button id="kw_clear_console">清除輸出區</button><button id="clear_bd">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
-<!-- 執行與清除按鈕結束 -->
-<p></p>
-<!-- 程式執行 ouput 區 -->
-<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console" style="margin: 0px; width: 485px; height: 195px;"></textarea></div>
-<div style="width: 100%; height: 100%;"></div>
-<div style="width: 100%; height: 100%;"></div>
-<br />手動貪食蛇 << <a href='手動貪食蛇.html'>Previous</a> <a href='Final Project.html'>Next</a> >> Final Project</div>
+    <div id="tipue_search_content">自動貪食蛇 << <a href='自動貪食蛇.html'>Previous</a> <a href='期末總結.html'>Next</a> >> 期末總結<br /><h1>Final Project</h1>
+<p>Final Project 佔學期成績 30%</p>
+<p><span style="background-color: #ffff99;">Final Project 必須在 2022.01.05 22:00 之前完成</span>.</p>
+<p><a href="https://github.com/mdecourse/cp2021/discussions/11">Final Project 具體項目成果回報區</a>將於 2021.11.09 開啟, 於 <span style="background-color: #ff99cc;">2022.01.05 22:00 關閉</span></p>
+<p>利用 Brython 寫一個會<span style="background-color: #ffff99;">令人想玩</span>的網際遊戲.</p>
+<h4>參考章節:</h4>
+<ol>
+<li><a href="https://www.enago.tw/academy/%E5%A6%82%E4%BD%95%E6%92%B0%E5%AF%AB%E6%91%98%E8%A6%81%EF%BC%9F/">專題摘要</a></li>
+<li><a href="https://ctld.ntu.edu.tw/ls/strategy/lecture.php?index=126">資料蒐集</a></li>
+<li><a href="http://old.gst.org.tw/WPES/guideline_D-a.htm">設計動機</a></li>
+<li><a href="https://wordvice.com.tw/%E5%A6%82%E4%BD%95%E5%AF%AB%E5%A5%BD%E8%AB%96%E6%96%87%E4%B8%AD%E7%9A%84%E3%80%8C%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E3%80%8D/">設計方法</a></li>
+<li><a href="http://microbiology.scu.edu.tw/MIB/wong/courses/writing/result02.htm">結果與討論</a></li>
+<li><a href="https://www.enago.tw/academy/what-you-need-to-know-about-the-manuscript-appendix/">附錄</a></li>
+</ol>
+<h4>參考資料:</h4>
+<p style="padding-left: 30px;"><a href="https://github.com/collections/web-games">https://github.com/collections/web-games</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/topics/web-game">https://github.com/topics/web-game</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/topics/browser-game">https://github.com/topics/browser-game</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/leereilly/games">https://github.com/leereilly/games</a></p>
+<p style="padding-left: 30px;"><a href="https://bmsleight.github.io/brython-blocks/">https://bmsleight.github.io/brython-blocks/</a></p>
+<p style="padding-left: 30px;"><a href="https://github.com/mdecourse/brython-blocks">https://github.com/mdecourse/brython-blocks<br/></a></p>
+<br />自動貪食蛇 << <a href='自動貪食蛇.html'>Previous</a> <a href='期末總結.html'>Next</a> >> 期末總結</div>
         
     <!-- footer -->
       <div class="container">
